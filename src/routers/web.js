@@ -10,6 +10,8 @@ const router = express.Router();
 const initWebRoutes = (app) => {
     router.get("/", homeController.handleHelloWorld)
     router.get("/user", homeController.handleUserPage)
+    router.post("/users/create-user", homeController.handleCreateNewUser)
+
     return app.use("/", router); // tức là ứng dụng sẽ bắt đầu với cái dấu "/"
                                 //  vd khi /abc thì ứng dụng sẽ chạy là localhost:port/abc/about
 }
