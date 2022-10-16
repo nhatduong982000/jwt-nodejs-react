@@ -1,12 +1,7 @@
-// get the client
-import mysql from 'mysql2';
+import userService from '../service/userService'
+import bcrypt from 'bcryptjs';
+const salt = bcrypt.genSaltSync(10);
 
-// create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'jwt'
-});
 
 const handleHelloWorld = (req, res) => {
     return res.render("home.ejs")
@@ -20,16 +15,8 @@ const handleCreateNewUser = (req, res) => {
     let password = req.body.password;
     let username = req.body.userName;
     // console.log(req.body)
-    // simple query
-    connection.query(
-        ' INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, password, username],
-        function(err, results) {
-            if(err){
-                console.log(err)
-            }
-        console.log(results); // results contains rows returned by server
-        }
-    );
+    // userService.createNewUser(email, password, username)
+    userService.getUserList();
     return res.send("handleCreateNewUser")
 }
 
